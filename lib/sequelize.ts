@@ -3,7 +3,7 @@ import { Sequelize } from 'sequelize-typescript';
 export const sequelize = new Sequelize({
 	username: 'root',
 	password: 'Rajveer@2404',
-	database: 'sequelize-playground',
+	database: 'sequelize-musicApp',
 	host: 'localhost',
 	port: 3306,
 	dialect: 'mysql',

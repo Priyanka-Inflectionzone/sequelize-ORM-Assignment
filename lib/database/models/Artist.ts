@@ -5,19 +5,20 @@ import {
 	BelongsTo,
 	ForeignKey,
 	HasMany,
-	Scopes,
+	//Scopes,
 	// CreatedAt,
 	// UpdatedAt,
 	IsUUID,
 	PrimaryKey,
 	DataType,
-	BelongsToMany
+	//BelongsToMany
 } from 'sequelize-typescript';
 import { Optional } from 'sequelize';
 import { v4 } from 'uuid';
 import { User } from './User';
 import { Podcast } from './Podcast';
-import { ArtistPodcast } from './ArtistPodcast';
+//import { ArtistPodcast } from './UserPlaylistCreated';
+import { Audiobook } from './Audiobook';
 
 // import { Movie } from './Movie';
 // import { MovieActor } from './MovieActor';
@@ -91,7 +92,7 @@ interface ArtistAttributes {
 
 export type ArtistCreationAttributes = Optional<
 	ArtistAttributes,
-	'id'  | 'user'
+	'id'  | 'user'>
 	
 @Table({
 	timestamps: true,

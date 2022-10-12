@@ -4,14 +4,14 @@ import {
 	CreatedAt,
 	DataType,
 	DeletedAt,
-	HasMany,
+	//HasMany,
 	IsUUID,
 	Model,
 	PrimaryKey,
 	Scopes,
 	Table,
 	UpdatedAt,
-	//BelongsTo
+	BelongsToMany
 } from 'sequelize-typescript';
 import { v4 } from 'uuid';
 //import { GenderEnum } from '../../common.ts';
@@ -19,7 +19,8 @@ import { USER_TABLE_NAME } from '../constants';
 import { Account } from './Account';
 import { Artist } from './Artist';
 import { Playlist } from './Playlist';
-
+import { UserPlaylistCreated } from './UserPlaylistCreated';
+import { UserPlaylistFollowed } from './UserPlaylistFollowed';
 
 interface UserAttributes {
 	id: string;
@@ -42,7 +43,33 @@ type UserCreationAttributes = Optional<
 >;
 
 @Scopes(()=>({
-	
+	PlaylistsCreated:{
+		include:{
+			model : Playlist,
+			through : {attributes: []}
+		}
+	},
+
+	PlaylistFollowed:{
+		include: {
+			model: Playlist,
+			through : { attributes : []}
+		}
+	},
+
+	Full: {
+		include: [
+		{
+			model: Playlist,
+			through : { attributes : []}
+		},
+		{
+			model: Playlist,
+			through : { attributes : []}
+		}
+
+	]}
+
 }))
 
 
@@ -112,9 +139,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 	@DeletedAt
 	deletedAt!: Date;
 	
-	@HasMany(() => Playlist)
+	@BelongsToMany(() => Playlist, ()=>UserPlaylistCreated)
 	playlistsCreated!: Playlist[];
 
-	@HasMany(() => Playlist)
+	@BelongsToMany(() => Playlist, ()=> UserPlaylistFollowed)
 	playlistsFollowed!: Playlist[];
 }

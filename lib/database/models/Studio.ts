@@ -4,19 +4,20 @@ import {
 	IsUUID,
 	Column,
 	Table,
-	BelongsTo,
+	//BelongsTo,
 	//Scopes,
 	PrimaryKey,
 	CreatedAt,
 	UpdatedAt,
-	ForeignKey,
+	//ForeignKey,
 	HasMany,
 } from 'sequelize-typescript';
 // import { Podcast } from './Podcast';
 import { v4 } from 'uuid';
-import { Artist } from './Artist';
+//import { Artist } from './Artist';
 import{ Album } from './Album';
-import { Playlist } from './Playlist';
+import { Podcast } from './Podcast';
+import { Audiobook } from './Audiobook';
 
 // @Scopes(() => ({
 // 	movies: {
@@ -29,7 +30,7 @@ import { Playlist } from './Playlist';
 // 	},
 // }))
 @Table
-export class Single extends Model<Single> {
+export class Studio extends Model<Studio> {
 	@IsUUID(4)
 	@PrimaryKey
 	@Column({
@@ -43,25 +44,23 @@ export class Single extends Model<Single> {
 	id!: string;
 
 	@Column
-	singlename!: string;
+	name!: string;
 
 	@Column
-	releaseDate! : Date;
+	email! : string;
 
-	@ForeignKey(()=> Artist)
-	artistId! : string;
+	@Column
+	phone! : string;
 
-	@BelongsTo(() => Artist)
-	artistInfo?: Artist;
+	@HasMany(()=> Album)
+	albums! : Album;
 
-	@ForeignKey(()=> Album)
-	albumId! : string;
+	@HasMany(()=> Audiobook)
+	audiobooks! : Audiobook;
 
-	@BelongsTo(() => Album)
-	albumInfo?: Album;
+	@HasMany(()=> Podcast)
+	podcasts! : Podcast;
 
-	@HasMany(()=> Playlist)
-	playlists! : Playlist;
 
 	@CreatedAt
 	@Column

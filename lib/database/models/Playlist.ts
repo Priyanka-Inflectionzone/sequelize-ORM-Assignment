@@ -16,7 +16,7 @@ import {
 import { v4 } from 'uuid';
 import { User } from './User';
 import { Artist } from './Artist';
-import { DataType, IntegerDataType } from 'sequelize';
+import { IntegerDataType } from 'sequelize';
 
 
 @Table
@@ -39,7 +39,7 @@ export class Playlist extends Model<Playlist> {
 	numberOfSingles!:IntegerDataType;
 
 	@BelongsTo(() => single)
-	songs! : Artist;
+	songs! : single;
 
 	@ForeignKey(() => Studio)
 	@Column

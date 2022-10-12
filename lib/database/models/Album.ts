@@ -15,8 +15,8 @@ import {
 // import { Podcast } from './Podcast';
 import { v4 } from 'uuid';
 import { Artist } from './Artist';
-import{ Album } from './Album';
-import { Playlist } from './Playlist';
+import{ Single } from './Single';
+import { studio } from './studio';
 
 // @Scopes(() => ({
 // 	movies: {
@@ -29,7 +29,7 @@ import { Playlist } from './Playlist';
 // 	},
 // }))
 @Table
-export class Single extends Model<Single> {
+export class Album extends Model<Album> {
 	@IsUUID(4)
 	@PrimaryKey
 	@Column({
@@ -43,7 +43,10 @@ export class Single extends Model<Single> {
 	id!: string;
 
 	@Column
-	singlename!: string;
+	name!: string;
+
+	@Column
+	numberOfSingles!: number;
 
 	@Column
 	releaseDate! : Date;
@@ -54,14 +57,14 @@ export class Single extends Model<Single> {
 	@BelongsTo(() => Artist)
 	artistInfo?: Artist;
 
-	@ForeignKey(()=> Album)
-	albumId! : string;
+	@ForeignKey(()=> studio)
+	studioId! : string;
 
-	@BelongsTo(() => Album)
-	albumInfo?: Album;
+	@BelongsTo(() => studio)
+	studioInfo?: studio;
 
-	@HasMany(()=> Playlist)
-	playlists! : Playlist;
+	@HasMany(()=> Single)
+	singles! : Single[];
 
 	@CreatedAt
 	@Column

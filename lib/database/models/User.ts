@@ -8,35 +8,43 @@ import {
 	IsUUID,
 	Model,
 	PrimaryKey,
+	Scopes,
 	Table,
 	UpdatedAt,
+	//BelongsTo
 } from 'sequelize-typescript';
 import { v4 } from 'uuid';
-import { GenderEnum } from '../../common.ts';
+//import { GenderEnum } from '../../common.ts';
 import { USER_TABLE_NAME } from '../constants';
-import { UserRole } from './UserRole';
+import { Account } from './Account';
+import { Artist } from './Artist';
+import { Playlist } from './Playlist';
+
 
 interface UserAttributes {
 	id: string;
-	prefix: string;
 	firstName: string;
-	middleName?: string;
 	lastName: string;
 	email: string;
 	phone: string;
-	gender: string;
-	password: string;
-	dateOfBirth?: Date;
 	createdAt: Date;
 	updatedAt: Date;
 	deletedAt?: Date;
-	userRoles?: UserRole[];
+	account? : Account;
+	artist? : Artist;
+	playlistsCreated :  Playlist[];
+	playlistsFollowed : Playlist[]
 }
 
 type UserCreationAttributes = Optional<
 	UserAttributes,
-	'id' | 'deletedAt' | 'middleName' | 'userRoles'
+	'id' | 'deletedAt'
 >;
+
+@Scopes(()=>({
+	
+}))
+
 
 @Table({
 	timestamps: true,
@@ -58,28 +66,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 	})
 	id!: string;
 
-	@HasMany(() => UserRole)
-	userRoles!: UserRole[];
-
-	// createUserRoles: HasManyCreateAssociationMixin<UserRole>;
-
-	@Column({
-		type: DataType.STRING,
-		allowNull: false,
-	})
-	prefix!: string;
-
 	@Column({
 		type: DataType.STRING,
 		allowNull: false,
 	})
 	firstName!: string;
-
-	@Column({
-		type: DataType.STRING,
-		allowNull: true,
-	})
-	middleName!: string;
 
 	@Column({
 		type: DataType.STRING,
@@ -109,30 +100,6 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 	})
 	phone!: string;
 
-	@Column({
-		type: DataType.STRING,
-		allowNull: false,
-	})
-	password!: string;
-
-	@Column({
-		type: DataType.ENUM,
-		values: [
-			GenderEnum.FEMALE,
-			GenderEnum.MALE,
-			GenderEnum.OTHER,
-			GenderEnum.UNSPECIFIED,
-		],
-		allowNull: false,
-	})
-	gender!: string;
-
-	@Column({
-		type: DataType.DATEONLY,
-		allowNull: true,
-	})
-	dateOfBirth!: Date;
-
 	@Column
 	@CreatedAt
 	createdAt!: Date;
@@ -144,4 +111,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 	@Column
 	@DeletedAt
 	deletedAt!: Date;
+	
+	@HasMany(() => Playlist)
+	playlistsCreated!: Playlist[];
+
+	@HasMany(() => Playlist)
+	playlistsFollowed!: Playlist[];
 }

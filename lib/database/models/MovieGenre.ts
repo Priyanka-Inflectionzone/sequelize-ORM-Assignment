@@ -1,6 +1,6 @@
 import { Model, Column, Table, ForeignKey } from 'sequelize-typescript';
-import { Movie } from './Movie';
-import { Genre } from './Genre';
+import { Movie } from './Podcast';
+import { Genre } from './Single';
 
 @Table
 export class MovieGenre extends Model<MovieGenre> {

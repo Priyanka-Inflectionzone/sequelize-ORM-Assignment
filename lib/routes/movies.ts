@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Movie } from '../database/models/Movie';
+import { Movie } from '../database/models/Podcast';
 
 export const movies = Router();
 

@@ -4,11 +4,12 @@ import {
 	Table,
 	BelongsToMany,
 	Scopes,
+	PrimaryKey,
 	CreatedAt,
 	UpdatedAt,
 } from 'sequelize-typescript';
-import { Movie } from './Movie';
-import { MovieActor } from './MovieActor';
+import { Podcast } from './Podcast';
+import { MovieGenre } from './MovieGenre';
 
 @Scopes(() => ({
 	movies: {
@@ -21,17 +22,12 @@ import { MovieActor } from './MovieActor';
 	},
 }))
 @Table
-export class Actor extends Model<Actor> {
+export class Genre extends Model<Genre> {
+	@PrimaryKey
 	@Column
-	firstName!: string;
+	name!: string;
 
-	@Column
-	lastName!: string;
-
-	@Column
-	birthday?: Date;
-
-	@BelongsToMany(() => Movie, () => MovieActor)
+	@BelongsToMany(() => Movie, () => MovieGenre)
 	movies?: Movie[];
 
 	@CreatedAt

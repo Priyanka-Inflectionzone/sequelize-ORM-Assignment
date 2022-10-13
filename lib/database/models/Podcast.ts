@@ -15,6 +15,7 @@ import {
 //import { Optional } from 'sequelize';
 import { v4 } from 'uuid';
 import { Artist } from './Artist';
+import { Studio } from './Studio';
 import { PodcastEpisode } from './PodcastEpisode';
 //import { MovieGenre } from './MovieGenre';
 
@@ -110,17 +111,11 @@ export class Podcast extends Model<Podcast> {
 
 
 	@ForeignKey(() => Studio)
-	@Column({
-		type: DataType.UUID,
-		allowNull: false,
-	})
+	@Column
 	studioId!: string;
 
-	@BelongsTo(() => Studio, {
-		keyType: DataType.UUID,
-		targetKey: 'id',
-	})
-	studio: Studio = new Studio();
+	@BelongsTo(() => Studio)
+	studio!: Studio;
 
 	@HasMany(() => PodcastEpisode)
 	podcastEpisodes!: PodcastEpisode[];

@@ -25,58 +25,7 @@ import { Single } from './Single';
 // import { Movie } from './Movie';
 // import { MovieActor } from './MovieActor';
 
-// @Scopes(() => ({
-// 	Podcast: {
-// 		include: [
-// 			{
-// 				model: Podcast,
-// 				through: { attributes: [] },
-// 			},
-// 		],
-// 	},
-// 	Audiobook :{
-// 		include :
-// 		{
-// 			model :Audiobook,
-// 			through : {attributes : []},
-// 		}
-// 	},
-// 	Single :{
-// 		include :
-// 		{
-// 			model :Single,
-// 			through : {attributes : []},
-// 		}
-// 	},
-// 	Album :{
-// 		include :
-// 		{
-// 			model :Album,
-// 			through : {attributes : []},
-// 		}
-// 	},
-// full:{
-// 	include: [
-// 		{
-// 			model: Podcast,
-// 			through: { attributes: [] },
-// 		},
-// 		{
-// 			model: Audiobook,
-// 			through: { attributes: [] },
-// 		},
-// 		{
-// 			model: Single,
-// 			through: { attributes: [] },
-// 		},
-// 		{
-// 			model: Album,
-// 			through: { attributes: [] },
-// 		}
-// 	]
-// }
 
-// }))
 interface ArtistAttributes {
 	id: string;
 	monthlyListeners: string

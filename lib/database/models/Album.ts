@@ -1,3 +1,4 @@
+//import {  DataTypes } from 'sequelize';
 import {
 	Model,
 	DataType,
@@ -16,7 +17,7 @@ import {
 import { v4 } from 'uuid';
 import { Artist } from './Artist';
 import{ Single } from './Single';
-import { studio } from './studio';
+import { Studio } from './Studio';
 
 // @Scopes(() => ({
 // 	movies: {
@@ -46,7 +47,7 @@ export class Album extends Model<Album> {
 	name!: string;
 
 	@Column
-	numberOfSingles!: number;
+	numberOfSingles!: string;
 
 	@Column
 	releaseDate! : Date;
@@ -57,11 +58,11 @@ export class Album extends Model<Album> {
 	@BelongsTo(() => Artist)
 	artistInfo?: Artist;
 
-	@ForeignKey(()=> studio)
+	@ForeignKey(()=> Studio)
 	studioId! : string;
 
-	@BelongsTo(() => studio)
-	studioInfo?: studio;
+	@BelongsTo(() => Studio)
+	studioInfo?: Studio;
 
 	@HasMany(()=> Single)
 	singles! : Single[];

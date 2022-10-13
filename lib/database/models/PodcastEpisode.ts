@@ -5,17 +5,18 @@ import {
 	CreatedAt,
 	Model,
 	ForeignKey,
-    Scopes,
+    //Scopes,
 	//Scopes,
 	Table,
 	UpdatedAt,
 	IsUUID,
 	PrimaryKey
 } from 'sequelize-typescript';
-import { Optional } from 'sequelize';
+//import { Optional } from 'sequelize';
 import { v4 } from 'uuid';
 import {Podcast} from './Podcast'
 
+@Table
 export class PodcastEpisode extends Model<PodcastEpisode> {
 	@IsUUID(4)
 	@PrimaryKey

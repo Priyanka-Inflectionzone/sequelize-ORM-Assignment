@@ -15,6 +15,7 @@ import {
 //import { Optional } from 'sequelize';
 import { v4 } from 'uuid';
 import { Artist } from './Artist';
+import { Studio } from './Studio';
 
 @Table
 export class Audiobook extends Model<Audiobook> {

@@ -19,6 +19,8 @@ import { User } from './User';
 import { Podcast } from './Podcast';
 //import { ArtistPodcast } from './UserPlaylistCreated';
 import { Audiobook } from './Audiobook';
+import { Album } from './Album';
+import { Single } from './Single';
 
 // import { Movie } from './Movie';
 // import { MovieActor } from './MovieActor';

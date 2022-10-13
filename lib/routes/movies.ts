@@ -1,16 +1,16 @@
 import { Router } from 'express';
-import { Movie } from '../database/models/Podcast';
+//import { Podcast } from '../database/models/Podcast';
 
 export const movies = Router();
 
-movies.post('/', async (req, res, next) => {
-	try {
-		const movie = await Movie.create(req.body);
-		res.status(201).json(movie);
-	} catch (e) {
-		next(e);
-	}
-});
+// movies.post('/', async (req, res, next) => {
+// 	try {
+// 		const movie = await Movie.create(req.body);
+// 		res.status(201).json(movie);
+// 	} catch (e) {
+// 		next(e);
+// 	}
+// });
 
 movies.get('', async (req, res, next) => {
 	try {

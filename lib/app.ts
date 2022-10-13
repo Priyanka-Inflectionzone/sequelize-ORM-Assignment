@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as errorhandler from 'strong-error-handler';
 import { movies } from './routes/movies';
-import { actors } from './routes/actors';
+import { artists } from './routes/artists';
 import { users } from './routes/users';
 
 export const app = express();
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/movies', movies);
-app.use('/actors', actors);
+app.use('/artists', artists);
 app.use('/users', users);
 
 app.use(

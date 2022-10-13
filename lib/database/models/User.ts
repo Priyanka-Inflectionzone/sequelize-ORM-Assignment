@@ -15,7 +15,7 @@ import {
 } from 'sequelize-typescript';
 import { v4 } from 'uuid';
 //import { GenderEnum } from '../../common.ts';
-import { USER_TABLE_NAME } from '../constants';
+//import { USER_TABLE_NAME } from '../constants';
 import { Account } from './Account';
 import { Artist } from './Artist';
 import { Playlist } from './Playlist';
@@ -76,7 +76,7 @@ type UserCreationAttributes = Optional<
 @Table({
 	timestamps: true,
 	modelName: 'User',
-	tableName: USER_TABLE_NAME,
+	tableName: 'User',
 	paranoid: true,
 	freezeTableName: true,
 })

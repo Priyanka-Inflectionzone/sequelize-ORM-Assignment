@@ -1,31 +1,31 @@
 import { Router } from 'express';
-import { User } from '../database/models/User';
+import { Account } from '../database/models/Account';
 // import { UserRole } from '../database/models/UserRole';
 
-export const users = Router();
+export const accounts = Router();
 
-users.post('/add', async (req, res, next) => {
+accounts.post('/add', async (req, res, next) => {
 	try {
-		const user = await User.bulkCreate(req.body);
+		const user = await Account.bulkCreate(req.body);
 		res.status(201).json(user);
 	} catch (e) {
 		next(e);
 	}
 });
 
-users.get('/find', async (req, res, next) => {
+accounts.get('/find', async (req, res, next) => {
 	try {
-		const users = await User.findAll();
+		const users = await Account.findAll();
 		res.status(200).json(users);
 	} catch (e) {
 		next(e);
 	}
 });
 
-users.get('/find/:id', async (req, res, next) => {
+accounts.get('/find/:id', async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const user = await User.findOne({
+		const user = await Account.findOne({
 			where: {
 				id: id,
 			},
@@ -36,7 +36,7 @@ users.get('/find/:id', async (req, res, next) => {
 	}
 });
 
-users.put('/update/:id', async (req, res, next) => {
+accounts.put('/update/:id', async (req, res, next) => {
 	try {
 		res.sendStatus(200);
 	} catch (e) {

@@ -6,7 +6,7 @@ export const users = Router();
 
 users.post('/add', async (req, res, next) => {
 	try {
-		const user = await User.bulkCreate(req.body);
+		const user = await User.create(req.body);
 		res.status(201).json(user);
 	} catch (e) {
 		next(e);

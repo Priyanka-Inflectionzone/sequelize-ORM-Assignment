@@ -1,9 +1,11 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as errorhandler from 'strong-error-handler';
-// import { podcasts } from './routes/podcasts';
-// import { artists } from './routes/artists';
+import { artists } from './routes/artists';
+ import { accounts } from './routes/accounts';
 import { users } from './routes/users';
+import { podcasts } from './routes/podcasts';
+import { podcastEpisodes } from './routes/podcastEpisodes';
 
 export const app = express();
 
@@ -23,9 +25,11 @@ app.use((req, res, next) => {
 	next();
 });
 
-// app.use('/podcasts', podcasts);
-// app.use('/artists', artists);
+ app.use('/artists', artists);
+ app.use('/accounts', accounts);
  app.use('/users', users);
+ app.use('/podcasts', podcasts);
+ app.use('/podcastEpisodes', podcastEpisodes);
 
 app.use(
 	errorhandler({
@@ -33,3 +37,4 @@ app.use(
 		log: true,
 	})
 );
+

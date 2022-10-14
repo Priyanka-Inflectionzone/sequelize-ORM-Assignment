@@ -16,6 +16,7 @@ import {
 import { v4 } from 'uuid';
 import { Artist } from './Artist';
 import { PodcastEpisode } from './PodcastEpisode';
+//import { Studio } from './Studio';
 
 @Table
 export class Podcast extends Model<Podcast> {

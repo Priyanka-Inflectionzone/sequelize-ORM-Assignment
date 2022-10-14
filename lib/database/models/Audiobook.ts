@@ -15,6 +15,7 @@ import {
 //import { Optional } from 'sequelize';
 import { v4 } from 'uuid';
 import { Artist } from './Artist';
+import { Studio } from './Studio';
 
 @Table
 export class Audiobook extends Model<Audiobook> {
@@ -49,5 +50,16 @@ export class Audiobook extends Model<Audiobook> {
 
 	@BelongsTo(() => Artist)
 	artistInfo! : Artist;
+
+    @ForeignKey(() => Studio)
+	@Column({
+		type: DataType.UUID,
+		allowNull: false,
+	})
+	studioId!: string;
+
+	@BelongsTo(() => Studio)
+	studioInfo! : Studio;
+
 
 }

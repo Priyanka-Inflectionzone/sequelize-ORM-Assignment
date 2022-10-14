@@ -6,6 +6,9 @@ import { artists } from './routes/artists';
 import { users } from './routes/users';
 import { podcasts } from './routes/podcasts';
 import { podcastEpisodes } from './routes/podcastEpisodes';
+import { audiobooks } from './routes/audiobooks';
+import { studios } from './routes/studios';
+
 
 export const app = express();
 
@@ -30,6 +33,8 @@ app.use((req, res, next) => {
  app.use('/users', users);
  app.use('/podcasts', podcasts);
  app.use('/podcastEpisodes', podcastEpisodes);
+ app.use('/audiobooks', audiobooks);
+ app.use('/studios', studios);
 
 app.use(
 	errorhandler({

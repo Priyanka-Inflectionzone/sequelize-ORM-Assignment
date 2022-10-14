@@ -32,7 +32,7 @@ interface UserAttributes {
 
 type UserCreationAttributes = Optional<
 	UserAttributes,
-	'id' | 'deletedAt' >
+	'id' | 'createdAt' | 'updatedAt' | 'deletedAt' >
 
     @Table({
         timestamps: true,

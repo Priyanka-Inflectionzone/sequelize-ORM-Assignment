@@ -8,4 +8,12 @@ export const sequelize = new Sequelize({
 	port: 3306,
 	dialect: 'mysql',
 	models: [__dirname + '/database/models'],
+	logging : true
 });
+sequelize.authenticate()
+.then(()=>{
+  console.log("Connected");
+})
+.catch (err =>{
+    console.log("Error" +err);
+})

@@ -47,9 +47,6 @@ export class Album extends Model<Album> {
 	name!: string;
 
 	@Column
-	numberOfSingles!: string;
-
-	@Column
 	releaseDate! : Date;
 
 	@ForeignKey(()=> Artist)

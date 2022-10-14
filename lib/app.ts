@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as errorhandler from 'strong-error-handler';
-import { movies } from './routes/movies';
+import { podcasts } from './routes/podcasts';
 import { artists } from './routes/artists';
 import { users } from './routes/users';
 
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use('/movies', movies);
+app.use('/podcasts', podcasts);
 app.use('/artists', artists);
 app.use('/users', users);
 

@@ -103,11 +103,8 @@ export class Podcast extends Model<Podcast> {
 	})
 	artistId!: string;
 
-	@BelongsTo(() => Artist, {
-		keyType: DataType.UUID,
-		targetKey: 'id',
-	})
-	artist: Artist = new Artist();
+	@BelongsTo(() => Artist)
+	artist!: Artist
 
 
 	@ForeignKey(() => Studio)

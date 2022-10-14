@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import{ Artist } from '../database/models/Artist'
+//import { Podcast } from '../database/models/Podcast';
 
 export const artists = Router();
 
@@ -24,7 +25,13 @@ artists.get('/find', async (req, res, next) => {
 
 artists.get('/find/:id', async (req, res, next) => {
 	try {
-		res.sendStatus(200);
+		const { id } = req.params;
+		const artist = await Artist.findOne({
+			where: {
+				id: id,
+			},
+		});
+		res.sendStatus(200).json(artist);
 	} catch (e) {
 		next(e);
 	}

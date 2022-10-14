@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 import * as errorhandler from 'strong-error-handler';
 // import { podcasts } from './routes/podcasts';
 // import { artists } from './routes/artists';
-// import { users } from './routes/users';
+import { users } from './routes/users';
 
 export const app = express();
 
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 // app.use('/podcasts', podcasts);
 // app.use('/artists', artists);
-// app.use('/users', users);
+ app.use('/users', users);
 
 app.use(
 	errorhandler({

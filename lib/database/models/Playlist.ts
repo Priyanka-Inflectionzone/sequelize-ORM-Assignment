@@ -5,11 +5,12 @@ import {
 	//CreatedAt,
 	Model,
 	ForeignKey,
-	//Scopes,
+	Scopes,
 	Table,
 	//UpdatedAt,
 	IsUUID,
 	PrimaryKey,
+	BelongsToMany,
 	//HasMany
 } from 'sequelize-typescript';
 //import { Optional } from 'sequelize';
@@ -19,6 +20,17 @@ import { v4 } from 'uuid';
 import {Single} from './Single'
 import { User } from './User';
 import { UserPlaylistFollowed } from './UserPlaylistFollowed';
+
+@Scopes(() => ({
+	users: {
+		include: [
+			{
+				model: User,
+				through: { attributes: [] },
+			},
+		],
+	},
+}))
 
 @Table
 export class Playlist extends Model<Playlist> {
@@ -49,11 +61,7 @@ export class Playlist extends Model<Playlist> {
 	@BelongsTo(() => User)
 	userInfo! : User;
 
-	@ForeignKey(() => UserPlaylistFollowed)
-	@Column
-	followers!: string;
-
-	@BelongsTo(() => UserPlaylistFollowed)
-	userIdInfo! : UserPlaylistFollowed;
+	@BelongsToMany(() => UserPlaylistFollowed, ()=> User)
+	followers! : UserPlaylistFollowed[];
 
 }

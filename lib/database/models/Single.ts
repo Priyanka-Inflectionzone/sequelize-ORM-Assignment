@@ -41,17 +41,26 @@ export class Single extends Model<Single> {
 	@ForeignKey(()=> Artist)
 	artistId! : string;
 
-	@BelongsTo(() => Artist)
-	artistInfo?: Artist;
+	@BelongsTo(() => Artist, {
+		keyType: DataType.UUID,
+		targetKey: 'id',
+	})
+	user!: Artist
 
 	@ForeignKey(()=> Album)
-	albumId! : string;
+	@Column ({
+		allowNull: true
+	})
+	albumId? : string;
 
-	@BelongsTo(() => Album)
-	albumInfo?: Album;
+	@BelongsTo(() => Album, {
+		keyType: DataType.UUID,
+		targetKey: 'id',
+	})
+	album?: Album;
 
 	@HasMany(()=> Playlist)
-	playlists! : Playlist;
+	playlists! : Playlist[];
 
 	@CreatedAt
 	@Column

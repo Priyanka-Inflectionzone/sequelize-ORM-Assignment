@@ -9,13 +9,15 @@ import {
 	IsUUID,
 	Model,
 	PrimaryKey,
-	//Scopes,
+	Scopes,
 	Table,
 	UpdatedAt,
-	//BelongsToMany
+	BelongsToMany
 } from 'sequelize-typescript';
 import { v4 } from 'uuid';
 import { UserPlaylistFollowed } from './UserPlaylistFollowed';
+import { Playlist} from './Playlist';
+
 
 interface UserAttributes {
 	id: string;
@@ -28,13 +30,25 @@ interface UserAttributes {
 	deletedAt?: Date;
 	// account? : Account;
 	// artist? : Artist;
-	// playlistsCreated :  Playlist[];
-	// playlistsFollowed : Playlist[]
+	playlistsCreated :  Playlist[];
+	playlistsFollowed : Playlist[];
 }
 
 type UserCreationAttributes = Optional<
 	UserAttributes,
 	'id' | 'createdAt' | 'updatedAt' | 'deletedAt' >
+
+    @Scopes(() => ({
+        playlists: {
+            include: [
+                {
+                    model: Playlist,
+                    through: { attributes: [] },
+                },
+            ],
+        },
+    }))
+    
 
     @Table({
         timestamps: true,
@@ -91,9 +105,11 @@ type UserCreationAttributes = Optional<
         phone!: string;
 
         
-        @HasMany(()=> UserPlaylistFollowed) 
-        @Column
+        @BelongsToMany(()=> UserPlaylistFollowed, ()=> Playlist) 
         playlistsFollowed! : UserPlaylistFollowed[];
+
+        @HasMany(()=> Playlist) 
+        playlistsCreated! : Playlist[];
     
         @Column
         @CreatedAt

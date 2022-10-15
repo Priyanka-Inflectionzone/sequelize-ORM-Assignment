@@ -4,6 +4,7 @@ import {
 	CreatedAt,
 	DataType,
 	DeletedAt,
+	HasMany,
 	//HasMany,
 	IsUUID,
 	Model,
@@ -14,6 +15,7 @@ import {
 	//BelongsToMany
 } from 'sequelize-typescript';
 import { v4 } from 'uuid';
+import { UserPlaylistFollowed } from './UserPlaylistFollowed';
 
 interface UserAttributes {
 	id: string;
@@ -87,6 +89,11 @@ type UserCreationAttributes = Optional<
             },
         })
         phone!: string;
+
+        
+        @HasMany(()=> UserPlaylistFollowed) 
+        @Column
+        playlistsFollowed! : UserPlaylistFollowed[];
     
         @Column
         @CreatedAt

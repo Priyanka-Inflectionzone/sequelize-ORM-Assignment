@@ -56,14 +56,15 @@ export class Playlist extends Model<Playlist> {
 
 	@ForeignKey(() => User)
 	@Column({
-		type: DataType.UUID
+		type: DataType.UUID,
+		unique : true
 	})
 	createdBy!: string;
 
 	@BelongsTo(() => User,'createdBy')
-	userInfo!: User
+	userInfo!: User;
 
-	@BelongsToMany(()=> User, () => UserPlaylistFollowed )
-	followers! : UserPlaylistFollowed[];
+	@BelongsToMany(()=> User, () => UserPlaylistFollowed, 'PlaylistId' )
+	followers! : User[];
 
 }

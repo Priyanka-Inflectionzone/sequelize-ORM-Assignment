@@ -3,9 +3,6 @@ import {
 	CreatedAt,
 	DataType,
 	DeletedAt,
-	//HasMany,
-    // BelongsTo,
-    // ForeignKey,
 	IsUUID,
 	Model,
 	PrimaryKey,
@@ -106,11 +103,11 @@ import { Playlist} from './Playlist';
         phone!: string;
 
         
-        @BelongsToMany(()=> Playlist, ()=> UserPlaylistFollowed) 
-        playlistsFollowed? : Playlist[];
+        @BelongsToMany(()=> Playlist, ()=> UserPlaylistFollowed, 'UserId') 
+        playlistsFollowed! : Playlist[];
     
         @HasMany(()=> Playlist, 'createdBy')
-        playlists? : Playlist[];
+        playlists! : Playlist[];
 
 
         @Column

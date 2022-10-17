@@ -55,7 +55,9 @@ export class Playlist extends Model<Playlist> {
 	songs! : Single[];
 
 	@ForeignKey(() => User)
-	@Column
+	@Column({
+		type: DataType.UUID
+	})
 	createdBy!: string;
 
 	@BelongsTo(() => User,'createdBy')

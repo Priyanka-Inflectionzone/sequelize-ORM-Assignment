@@ -107,7 +107,7 @@ import { Playlist} from './Playlist';
         phone!: string;
 
         
-        @BelongsToMany(()=> Playlist, ()=> UserPlaylistFollowed,) 
+        @BelongsToMany(()=> Playlist, ()=> UserPlaylistFollowed) 
         playlistsFollowed? : Playlist[];
     
         @HasMany(()=> Playlist, 'createdBy')

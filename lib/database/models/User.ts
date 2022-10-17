@@ -1,42 +1,44 @@
-import { Optional } from 'sequelize';
+//import { Optional } from 'sequelize';
 import {
 	Column,
 	CreatedAt,
 	DataType,
 	DeletedAt,
-	HasMany,
 	//HasMany,
+    // BelongsTo,
+    // ForeignKey,
 	IsUUID,
 	Model,
 	PrimaryKey,
 	Scopes,
 	Table,
 	UpdatedAt,
-	BelongsToMany
+	BelongsToMany,
+    HasMany
 } from 'sequelize-typescript';
 import { v4 } from 'uuid';
 import { UserPlaylistFollowed } from './UserPlaylistFollowed';
 import { Playlist} from './Playlist';
 
 
-interface UserAttributes {
-	id: string;
-	firstName: string;
-	lastName: string;
-	email: string;
-	phone: string;
-	createdAt: Date;
-	updatedAt: Date;
-	deletedAt?: Date;
+// interface UserAttributes {
+// 	id: string;
+// 	firstName: string;
+// 	lastName: string;
+// 	email: string;
+// 	phone: string;
+// 	createdAt: Date;
+// 	updatedAt: Date;
+// 	deletedAt?: Date;
 	// account? : Account;
 	// artist? : Artist;
-	playlistsCreated :  Playlist[];
-	playlistsFollowed : Playlist[];
-}
+	// playlistsCreated :  Playlist[];
+	// playlistsFollowed : Playlist[];
+// }
 
-type UserCreationAttributes = Optional<
-	UserAttributes,
-	'id' | 'createdAt' | 'updatedAt' | 'deletedAt' >
+// type UserCreationAttributes = Optional<
+// 	UserAttributes,
+// 	'id' | 'createdAt' | 'updatedAt' | 'deletedAt' >
 
     @Scopes(() => ({
         playlists: {
@@ -57,7 +59,7 @@ type UserCreationAttributes = Optional<
         paranoid: true,
         freezeTableName: true,
     })
-    export class User extends Model<UserAttributes, UserCreationAttributes> {
+    export class User extends Model<User> {
         @IsUUID(4)
         @PrimaryKey
         @Column({
@@ -105,12 +107,13 @@ type UserCreationAttributes = Optional<
         phone!: string;
 
         
-        @BelongsToMany(()=> UserPlaylistFollowed, ()=> Playlist) 
-        playlistsFollowed! : UserPlaylistFollowed[];
-
-        @HasMany(()=> Playlist) 
-        playlistsCreated! : Playlist[];
+        @BelongsToMany(()=> Playlist, ()=> UserPlaylistFollowed,) 
+        playlistsFollowed? : Playlist[];
     
+        @HasMany(()=> Playlist, 'createdBy')
+        playlists? : Playlist[];
+
+
         @Column
         @CreatedAt
         createdAt!: Date;

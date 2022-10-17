@@ -58,10 +58,10 @@ export class Playlist extends Model<Playlist> {
 	@Column
 	createdBy!: string;
 
-	@BelongsTo(() => User)
-	userInfo! : User;
+	@BelongsTo(() => User,'createdBy')
+	userInfo!: User
 
-	@BelongsToMany(() => UserPlaylistFollowed, ()=> User)
+	@BelongsToMany(()=> User, () => UserPlaylistFollowed )
 	followers! : UserPlaylistFollowed[];
 
 }
